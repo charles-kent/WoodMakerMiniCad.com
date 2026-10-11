@@ -1,118 +1,99 @@
-/* woodmakerminicad.com - Master Stylesheet - Stage 1 */
+/* WoodmakerMiniCAD - First Stage Stylesheet - Enlarged for GitHub development */
 :root {
-  --ash: #e8dcc5;
-  --ash-light: #f5efe6;
-  --cherry: #a85a4a;
-  --walnut: #5d4037;
-  --oak: #d2b48c;
-  --border: #000000;
-  --text: #222222;
-  --text-light: #555555;
-  --bg: #ffffff;
-  --bg-page: #f8f5f0;
-  --active-green: #2e7d32;
-  --font-main: Arial, Helvetica, sans-serif;
-  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+  --bg: #FFFEFB;
+  --bg-warm: #FFF6EC;
+  --text: #3D2B1F;
+  --text-light: #6B5A4B;
+  --text-faint: #9C8C7D;
+  --amber: #E8A355;
+  --amber-dark: #C9873A;
+  --amber-light: #FFF0D9;
+  --border: #EADDCB;
+  --border-strong: #D4C4A8;
+  --surface: #FFFFFF;
+  --surface-raised: #FFFEFB;
+  --radius: 14px;
+  --radius-sm: 10px;
+  --max-width: 900px;
 }
 
-html, body {
-  min-height: 100%;
-  margin: 0;
-  background: var(--bg-page);
-  font-family: var(--font-main);
-  color: var(--text);
-  -webkit-font-smoothing: antialiased;
-}
+/* Reset & base */
+* { box-sizing: border-box; }
+html { background: var(--bg); font-size: 18px; -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+body { margin:0; background: var(--bg); color: var(--text); font-family: Georgia, "Times New Roman", Times, serif; line-height:1.6; letter-spacing:-0.01em; }
+.sans { font-family: ui-sans-system, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+.mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; }
+a { color: inherit; }
+img { max-width:100%; display:block; }
 
-#root {
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 16px 12px 32px 12px;
-  background: var(--bg);
-}
+/* Layout helpers */
+.container { max-width: var(--max-width); margin:0 auto; padding:0 28px; }
+@media (max-width:600px){ .container{ padding:0 20px; } }
 
-/* --- Form rows - extracted from inline JS style --- */
-.row {
-  margin-bottom: 6px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
+/* Header */
+.site-header { position: sticky; top:0; z-index:20; background: rgba(255,254,251,0.92); backdrop-filter: blur(8px); border-bottom:1px solid var(--border); }
+.header-inner { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px; padding:16px 0; }
+.brand { display:flex; align-items:center; gap:12px; }
+.brand-mark { width:34px; height:34px; flex-shrink:0; }
+.brand-title { font-weight:800; font-size:20px; letter-spacing:-0.02em; line-height:1; }
+.brand-sub { font-size:12px; color: var(--text-faint); margin-top:3px; letter-spacing:0.04em; }
+.notice { margin-top:6px; font-size:11px; color: var(--text-faint); background: var(--bg-warm); border:1px solid var(--border); padding:2px 8px; border-radius:999px; display:inline-flex; }
 
-.row label {
-  font-size: 14px;
-  display: inline-block;
-  width: 240px;
-  flex-shrink: 0;
-}
+/* Nav tabs */
+.nav { display:flex; gap:6px; overflow-x:auto; scrollbar-width:none; }
+.nav::-webkit-scrollbar{display:none;}
+.tab-btn { border:1px solid transparent; background: transparent; padding:8px 14px; border-radius:999px; font-size:13px; font-weight:600; cursor:pointer; white-space:nowrap; transition: all 0.18s ease; }
+.tab-btn:hover { background: var(--bg-warm); border-color: var(--border); }
+.tab-btn.active { background: var(--text); color: var(--bg); border-color: var(--text); }
 
-.row input {
-  background: white;
-  border: 1px solid var(--border);
-  padding: 2px 4px;
-  font-family: var(--font-main);
-  font-size: 14px;
-  width: 90px;
-}
+/* Sections */
+.tab-panel { display:none; animation: fadeIn 0.22s ease; }
+.tab-panel.active { display:block; }
+@keyframes fadeIn { from{opacity:0; transform:translateY(4px);} to{opacity:1; transform:translateY(0);} }
 
-/* --- Buttons --- */
-button.calc-btn {
-  background: #c0c0c0;
-  border: 2px solid var(--border);
-  padding: 2px 18px;
-  font-family: var(--font-main);
-  font-size: 14px;
-  cursor: pointer;
-}
-button.calc-btn:hover {
-  background: #b8b8b8;
-}
-button.calc-btn:active {
-  background: #a8a8a8;
-}
+.hero { padding:56px 0 24px; }
+.hero h1 { font-size: clamp(36px, 5vw, 54px); line-height:0.95; letter-spacing:-0.03em; font-weight:800; margin:0; max-width:680px; }
+.hero h1 em { font-style:normal; background: linear-gradient(0deg, var(--amber-light) 45%, transparent 45%); padding:0 2px; }
+.hero p { margin-top:18px; font-size:20px; line-height:1.55; max-width:620px; color: var(--text-light); }
+.btn-primary { display:inline-flex; align-items:center; justify-content:center; gap:8px; background: var(--text); color: var(--bg); border:1px solid var(--text); padding:14px 22px; border-radius:999px; font-weight:700; font-size:15px; cursor:pointer; text-decoration:none; transition: transform 0.12s ease, background 0.18s ease; }
+.btn-primary:hover { transform: translateY(-1px); background:#2B1E15; }
+.btn-secondary { display:inline-flex; align-items:center; gap:8px; background: var(--surface); border:1px solid var(--border); padding:12px 18px; border-radius:999px; font-weight:600; font-size:13px; cursor:pointer; }
+.card { background: var(--surface); border:1px solid var(--border); border-radius: var(--radius); padding:20px; }
+.card-warm { background: var(--bg-warm); }
+.paper-shadow { box-shadow: 0 1px 2px rgba(61,43,31,0.04), 0 8px 24px rgba(61,43,31,0.06); }
 
-/* --- Canvas / drawing area --- */
-.drawing-box {
-  background: #ffffff;
-  border: 1px solid var(--border);
-  width: 100%;
-  height: 360px;
-  position: relative;
-  overflow: hidden;
-}
+/* Calculator mock */
+.controls { display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap:16px; margin-top:20px; }
+.control label { display:block; font-size:12px; font-weight:700; letter-spacing:0.05em; text-transform:uppercase; color: var(--text-faint); margin-bottom:6px; }
+.control input[type=range]{ width:100%; accent-color: var(--amber-dark); }
+.control .value { font-size:14px; font-weight:600; margin-top:4px; }
+.pill-row { display:flex; gap:8px; flex-wrap:wrap; }
+.pill { padding:6px 12px; border-radius:999px; border:1px solid var(--border); background: var(--surface); font-size:13px; cursor:pointer; }
+.pill.active { background: var(--text); color: var(--bg); border-color: var(--text); }
 
-/* --- Info text --- */
-.info-small {
-  font-size: 11px;
-  color: #333;
-  margin-top: 10px;
-}
-.calc-meta {
-  font-size: 11px;
-  color: var(--text-light);
-  margin-top: 2px;
-}
+/* About */
+.about-wrap { max-width:660px; padding:40px 0 64px; }
+.about-wrap h2 { font-size: clamp(36px, 4vw, 44px); line-height:0.95; letter-spacing:-0.02em; margin:0; }
+.about-wrap p { font-size:19px; line-height:1.65; margin:24px 0; }
+.video-box { border:1.5px dashed var(--border-strong); background: rgba(255,246,236,0.4); border-radius: var(--radius); padding:20px; margin-top:32px; }
+.aspect-video { aspect-ratio:16/9; background: var(--surface); border:1px solid var(--border); border-radius:10px; display:grid; place-items:center; position:relative; overflow:hidden; }
 
-/* --- Responsive - iPhone friendly --- */
-@media (max-width: 600px) {
-  #root {
-    padding: 10px 8px 24px 8px;
-  }
-  .row {
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
-  .row label {
-    width: 100%;
-    margin-bottom: 2px;
-  }
-  .row input {
-    width: 110px;
-  }
-  .drawing-box {
-    height: 320px;
-  }
-}
+/* Coffee */
+.coffee { margin-top:48px; border:1px solid var(--border); border-radius: var(--radius); padding:22px; background: var(--surface); display:flex; flex-wrap:wrap; gap:18px; align-items:center; justify-content:space-between; }
+.coffee p { margin:0; font-size:15px; line-height:1.5; max-width:460px; }
+.coffee .btn-coffee { background: #FFDD00; color:#000; border-color:#000; font-weight:800; }
+.coffee .btn-coffee:hover{ background:#FFDD00; transform: translateY(-1px); }
 
-/* --- Future: revolving box page will reuse same variables --- */
-</style>
+/* Footer */
+.site-footer { border-top:1px solid var(--border); margin-top:32px; padding:28px 0; font-size:13px; color: var(--text-faint); }
+.footer-inner { display:flex; flex-wrap:wrap; justify-content:space-between; gap:16px; }
+
+/* Utilities for future growth */
+.badge { display:inline-flex; padding:2px 8px; border-radius:999px; background: var(--amber-light); border:1px solid var(--border); font-size:11px; }
+.divider { height:1px; background: var(--border); margin:24px 0; }
+
+/* Responsive */
+@media (max-width:700px){
+  .hero { padding-top:28px; }
+  .coffee { flex-direction:column; align-items:flex-start; }
+}
